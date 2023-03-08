@@ -1,5 +1,5 @@
 blueprint:
-  name: Thermostat TPI
+  name: Thermostat TPI + forecast + reverse
   description: Thermostat TPI (Time Propertional & Integral)
   domain: automation
 
@@ -31,7 +31,7 @@ blueprint:
       description: Sonde de mesure de la température extérieure (sensor)
       selector:
         entity:
-          domain: sensor
+          domain: input_number
           device_class: temperature
     entity_temp_int:
       name: Température intérieure
@@ -102,22 +102,22 @@ action:
           - condition: template
             value_template: '{{puissance == 0}}'
         sequence:
-          - service: switch.turn_off
+          - service: switch.turn_on
             target:
               entity_id: !input entity_chauffage
       - conditions:
           - condition: template
             value_template: '{{ puissance > 99}}'
         sequence:
-          - service: switch.turn_on
+          - service: switch.turn_off
             target:
               entity_id: !input entity_chauffage
     default:
-      - service: switch.turn_on
+      - service: switch.turn_off
         target:
           entity_id: !input entity_chauffage
       - delay: '{{temps_chauffe}}'
-      - service: switch.turn_off
+      - service: switch.turn_on
         target:
           entity_id: !input entity_chauffage
 mode: restart
