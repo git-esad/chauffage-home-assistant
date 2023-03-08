@@ -52,7 +52,7 @@ action:
       - conditions:
           - condition: state
             entity_id: !input entity_mode
-            state: Stop
+            state: stop
         sequence:
           - service: input_number.set_value
             data:
@@ -71,7 +71,7 @@ action:
       - conditions:
           - condition: state
             entity_id: !input entity_mode
-            state: Hors-gel
+            state: 'hors gel'
         sequence:
           - service: automation.turn_on
             target:
@@ -90,7 +90,7 @@ action:
       - conditions:
           - condition: state
             entity_id: !input entity_mode
-            state: Auto - confort
+            state: auto-confort
         sequence:
           - service: automation.turn_on
             target:
@@ -108,10 +108,10 @@ action:
             conditions:
               - condition: state
                 entity_id: !input entity_mode
-                state: 'Auto - eco'
+                state: 'auto-eco'
               - condition: state
                 entity_id: !input entity_mode
-                state: 'Absent'
+                state: 'absent'
         sequence:
           - service: automation.turn_on
             target:
